@@ -1,6 +1,7 @@
 package com.soferian.stocksfinance.entity;
 
 import com.soferian.stocksfinance.models.ExchangeType;
+import com.soferian.stocksfinance.models.Stock;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,8 @@ public class StockExchangeEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String stockName;
-
-    private String stockSymbol;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private StockEntity stock;
 
     private Double stockPrice;
 

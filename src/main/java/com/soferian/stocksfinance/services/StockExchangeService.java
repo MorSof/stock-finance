@@ -4,21 +4,18 @@ import com.soferian.stocksfinance.entity.StockExchangeEntity;
 import com.soferian.stocksfinance.util.converters.StockExchangeConverter;
 import com.soferian.stocksfinance.boundary.StockExchangeBoundary;
 import com.soferian.stocksfinance.data.dao.StockExchangeDao;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class StockExchangeService implements AbstractStockExchangeService {
 
     private StockExchangeDao stockExchangeDao;
     private StockExchangeConverter stockExchangeConverter;
-
-    public StockExchangeService(StockExchangeDao stockExchangeDao, StockExchangeConverter stockExchangeConverter) {
-        this.stockExchangeDao = stockExchangeDao;
-        this.stockExchangeConverter = stockExchangeConverter;
-    }
 
     @Override
     public StockExchangeBoundary create(StockExchangeBoundary stockExchangeBoundary) {
