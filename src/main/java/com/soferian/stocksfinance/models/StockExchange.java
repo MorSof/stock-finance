@@ -10,6 +10,10 @@ public class StockExchange {
 
     private Double profit;
 
+    private Commissions commissions;
+
+    private Taxes taxes;
+
     public StockExchange(StockSnapShot stockSnapShot, Integer numOfShares, ExchangeType exchangeType) {
         this.stockSnapShot = stockSnapShot;
         this.numOfShares = numOfShares;

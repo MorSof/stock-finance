@@ -5,15 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name="StockExchanges")
 @Getter
 @Setter
-public class StockExchangeEntity implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class StockExchangeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -29,6 +26,5 @@ public class StockExchangeEntity implements Serializable {
 
     private ExchangeType exchangeType;
 
-    @Column(name = "profit")
     private Double profit;
 }
