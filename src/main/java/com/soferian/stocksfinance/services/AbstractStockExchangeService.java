@@ -1,16 +1,16 @@
 package com.soferian.stocksfinance.services;
 
-import com.soferian.stocksfinance.boundary.StockExchangeBoundary;
+import com.soferian.stocksfinance.models.StockExchange;
 
 import java.util.List;
 
 public interface AbstractStockExchangeService {
 
-    public StockExchangeBoundary create(StockExchangeBoundary stockExchangeBoundary);
+    public StockExchange create(StockExchange stockExchange);
 
-    public StockExchangeBoundary findById(Long id);
+    public StockExchange findById(Long id);
 
-    public List<StockExchangeBoundary> findAll();
+    public List<StockExchange> findAll();
 
     Long totalProfit();
 }

@@ -1,8 +1,9 @@
 package com.soferian.stocksfinance.services;
 
+import com.soferian.stocksfinance.data.dao.StockDao;
 import com.soferian.stocksfinance.entity.StockExchangeEntity;
+import com.soferian.stocksfinance.models.StockExchange;
 import com.soferian.stocksfinance.util.converters.StockExchangeConverter;
-import com.soferian.stocksfinance.boundary.StockExchangeBoundary;
 import com.soferian.stocksfinance.data.dao.StockExchangeDao;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,21 +16,22 @@ import java.util.stream.Collectors;
 public class StockExchangeService implements AbstractStockExchangeService {
 
     private StockExchangeDao stockExchangeDao;
+    private StockDao stockDao;
     private StockExchangeConverter stockExchangeConverter;
 
     @Override
-    public StockExchangeBoundary create(StockExchangeBoundary stockExchangeBoundary) {
-        StockExchangeEntity stockExchangeEntity = stockExchangeDao.save(stockExchangeConverter.toEntity(stockExchangeBoundary));
+    public StockExchange create(StockExchange stockExchange) {
+        StockExchangeEntity stockExchangeEntity = stockExchangeDao.save(stockExchangeConverter.toEntity(stockExchange));
         return stockExchangeConverter.fromEntity(stockExchangeEntity);
     }
 
     @Override
-    public StockExchangeBoundary findById(Long id) {
+    public StockExchange findById(Long id) {
         return stockExchangeConverter.fromEntity(stockExchangeDao.getById(id));
     }
 
     @Override
-    public List<StockExchangeBoundary> findAll() {
+    public List<StockExchange> findAll() {
         return stockExchangeDao.findAll().stream().map(this.stockExchangeConverter::fromEntity).collect(Collectors.toList());
     }
 

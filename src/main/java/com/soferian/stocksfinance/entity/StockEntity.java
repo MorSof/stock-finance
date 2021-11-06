@@ -18,8 +18,10 @@ public class StockEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(unique=true)
     private String stockName;
 
+    @Column(unique=true)
     private String stockSymbol;
 
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

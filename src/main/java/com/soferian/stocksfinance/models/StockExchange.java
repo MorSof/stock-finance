@@ -2,6 +2,8 @@ package com.soferian.stocksfinance.models;
 
 public class StockExchange {
 
+    private Long id;
+
     private StockSnapShot stockSnapShot;
 
     private Integer numOfShares;

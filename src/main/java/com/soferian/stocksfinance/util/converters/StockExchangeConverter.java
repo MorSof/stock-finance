@@ -2,8 +2,6 @@ package com.soferian.stocksfinance.util.converters;
 
 import com.soferian.stocksfinance.entity.StockEntity;
 import com.soferian.stocksfinance.entity.StockExchangeEntity;
-import com.soferian.stocksfinance.boundary.StockExchangeBoundary;
-import com.soferian.stocksfinance.models.Stock;
 import com.soferian.stocksfinance.models.StockExchange;
 import com.soferian.stocksfinance.models.StockSnapShot;
 import org.springframework.stereotype.Component;
@@ -11,22 +9,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class StockExchangeConverter {
 
-    public StockExchangeBoundary fromEntity(StockExchangeEntity stockExchangeEntity) {
+    public StockExchange fromEntity(StockExchangeEntity stockExchangeEntity) {
         StockSnapShot stockSnapShot = new StockSnapShot(stockExchangeEntity.getStock().getStockName(), stockExchangeEntity.getStock().getStockSymbol(), stockExchangeEntity.getStockPrice());
-        StockExchange stockExchange = new StockExchange(stockSnapShot, stockExchangeEntity.getNumOfShares(), stockExchangeEntity.getExchangeType());
-        return new StockExchangeBoundary(stockExchangeEntity.getId(), stockExchange);
+        return new StockExchange(stockSnapShot, stockExchangeEntity.getNumOfShares(), stockExchangeEntity.getExchangeType());
     }
 
-    public StockExchangeEntity toEntity(StockExchangeBoundary stockExchangeBoundary) {
+    public StockExchangeEntity toEntity(StockExchange stockExchange) {
         StockExchangeEntity stockExchangeEntity = new StockExchangeEntity();
-        stockExchangeEntity.setStockPrice(stockExchangeBoundary.getStockExchange().getStockSnapShot().getStockPrice());
+        stockExchangeEntity.setStockPrice(stockExchange.getStockSnapShot().getStockPrice());
         stockExchangeEntity.setStock(new StockEntity(
-                stockExchangeBoundary.getStockExchange().getStockSnapShot().getStockSymbol(),
-                stockExchangeBoundary.getStockExchange().getStockSnapShot().getStockName())
+                stockExchange.getStockSnapShot().getStockSymbol(),
+                stockExchange.getStockSnapShot().getStockName())
         );
-        stockExchangeEntity.setNumOfShares(stockExchangeBoundary.getStockExchange().getNumOfShares());
-        stockExchangeEntity.setExchangeType(stockExchangeBoundary.getStockExchange().getExchangeType());
-        stockExchangeEntity.setProfit(stockExchangeBoundary.getStockExchange().getProfit());
+        stockExchangeEntity.setNumOfShares(stockExchange.getNumOfShares());
+        stockExchangeEntity.setExchangeType(stockExchange.getExchangeType());
+        stockExchangeEntity.setProfit(stockExchange.getProfit());
         return stockExchangeEntity;
     }
 }
