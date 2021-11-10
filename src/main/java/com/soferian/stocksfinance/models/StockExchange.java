@@ -1,5 +1,8 @@
 package com.soferian.stocksfinance.models;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class StockExchange {
 
     private Long id;
@@ -10,17 +13,34 @@ public class StockExchange {
 
     private ExchangeType exchangeType;
 
-    private Double profit;
+    private Double money;
 
     private Commissions commissions;
 
-    private Taxes taxes;
-
-    public StockExchange(StockSnapShot stockSnapShot, Integer numOfShares, ExchangeType exchangeType) {
+    public StockExchange(Long id, StockSnapShot stockSnapShot, Integer numOfShares,
+                         ExchangeType exchangeType, Double money, Commissions commissions) {
+        this.id = id;
         this.stockSnapShot = stockSnapShot;
         this.numOfShares = numOfShares;
         this.exchangeType = exchangeType;
-        calcProfit();
+        this.money = money;
+        this.commissions = commissions;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Commissions getCommissions() {
+        return commissions;
+    }
+
+    public void setCommissions(Commissions commissions) {
+        this.commissions = commissions;
     }
 
     public StockSnapShot getStockSnapShot() {
@@ -35,8 +55,8 @@ public class StockExchange {
         return exchangeType;
     }
 
-    public Double getProfit() {
-        return profit;
+    public Double getMoney() {
+        return money;
     }
 
     public void setStockSnapShot(StockSnapShot stockSnapShot) {
@@ -51,14 +71,15 @@ public class StockExchange {
         this.exchangeType = exchangeType;
     }
 
-    public void setProfit(Double profit) {
-        calcProfit();
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
-    public void calcProfit() {
-        this.profit = numOfShares * stockSnapShot.getStockPrice();
-        if (ExchangeType.BUY == exchangeType) {
-            this.profit *= -1;
+    public void calcMoney() {
+        money = numOfShares * stockSnapShot.getStockPrice();
+        money = money - commissions.getBuyAndSale() - commissions.getBroker() - commissions.getManagement() - commissions.getCustodian();
+        if (exchangeType == ExchangeType.SALE) {
+            money = money * (1 - commissions.getCapitalGainTax());
         }
     }
 }

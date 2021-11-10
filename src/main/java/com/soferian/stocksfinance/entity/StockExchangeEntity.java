@@ -1,7 +1,6 @@
 package com.soferian.stocksfinance.entity;
 
 import com.soferian.stocksfinance.models.ExchangeType;
-import com.soferian.stocksfinance.models.Stock;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +25,9 @@ public class StockExchangeEntity {
 
     private ExchangeType exchangeType;
 
-    private Double profit;
+    private Double money;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "commission_id", referencedColumnName = "id")
+    private CommissionEntity commission;
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Commissions implements Deduction{
+public class Commissions {
 
     private Float buyAndSale;
 
@@ -17,8 +17,5 @@ public class Commissions implements Deduction{
 
     private Float custodian;
 
-    @Override
-    public Double deduct(Double amount) {
-        return amount - buyAndSale - broker - management - custodian;
-    }
+    private Float capitalGainTax;
 }

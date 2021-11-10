@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockExchangeDao extends JpaRepository<StockExchangeEntity, Long> {
 
-    @Query("SELECT SUM (profit) FROM StockExchangeEntity")
+    @Query("SELECT SUM (money) FROM StockExchangeEntity")
     Long totalProfit();
 }
